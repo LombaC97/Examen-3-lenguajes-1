@@ -32,17 +32,17 @@ end
 class Busqueda
     #buscar setea las condiciones iniciales y devuelve realizar busqueda, que como tal es la que se encarga
     #de iniciar la busqueda
-    def buscar(d,h)
+    def buscar(d, h)
         visitados_inicial = Array.new() << d
         if (d == h)
             return "Nodos recorridos 0"
         end
-        return self.realizar_busqueda(d,h, 1, visitados_inicial, [], nil)
+        return self.realizar_busqueda(d, h, 0, visitados_inicial, [])
     end
     #Realizar busqueda recibe el nodo inicial, el final, un contador que inicialmente es 0
     #Maneja un array de visitados que inicialmente solo tiene el nodo de partida, y nodos que es
     #un array donde se van guardando la cantidad de nodos recorridos cada vez que logra llegar al nodo
-    def realizar_busqueda(d, h, count, visitados, nodos, anterior)
+    def realizar_busqueda(d, h, count, visitados, nodos)
         #Tomamos el array de elementos de la variable global tipo Grafo (Decidi manejarla global por simplicidad)
         array_elementos = $g.grafo[d]
         #Basicamente pila_cola va a depender de si se trata de un DFS o de un BFS. Este comportamiento se da en la funcion
@@ -51,8 +51,7 @@ class Busqueda
         pila_cola = self.orden(array_elementos)
         #Si la pila_cola incluye el h, retornamos true
         if pila_cola.elements.include? h 
-           
-            return true
+            nodos << count
         #En cualquier otro caso
         else
             #Recorremos la pila_cola mientras que no este vacias
@@ -63,11 +62,8 @@ class Busqueda
                 if not(visitados.include? elem)
                     #Lo ponemos en el array
                     visitados << elem
-                    #Y si llega a dar true la llamada recursiva (es decir, encontro el elemento)
-                    if realizar_busqueda(elem, h , count + 1 , visitados, nodos, d) == true
-                        #Entonces agregamos el count + 1 al array de nodos
-                        nodos << count + 1
-                    end 
+                    #Y llamamos recursivamente
+                    realizar_busqueda(elem, h , count + 1 , visitados, nodos)
                 end
             end
         end
@@ -100,6 +96,6 @@ $g = Grafo.new
 dfs = DFS.new()
 bfs = BFS.new()
 
-puts dfs.buscar(3,6)
+puts dfs.buscar(2,8)
 
-puts bfs.buscar(3,6)
+puts bfs.buscar(2,8)
