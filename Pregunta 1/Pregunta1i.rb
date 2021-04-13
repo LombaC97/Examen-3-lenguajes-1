@@ -1,11 +1,15 @@
 #En ruby no existen clases abstractas como tal, pero podemos simular una clase
 #que define estos métodos, sin embargo, no incluye comportamiento
 class Secuencia
+    #@abstract
     def agregar
+        raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
     end
     def remover
+        raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
     end
     def vacio
+        raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
     end
 end
 #Pila hereda de Secuencia, y va a tener un array de elements que básicamente va a representar la pila
@@ -52,7 +56,3 @@ class Cola < Secuencia
         return @elements.empty?
     end
 end
-
-
-
-
