@@ -47,5 +47,25 @@ class TestTableMethods(unittest.TestCase):
             output = mocked_stdout.getvalue() 
         self.assertEqual(output, "f -> A :: f\ng -> B :: g\nh -> A :: h\nk -> B :: k\n")
 
+    def test_7(self):
+        entrada = "CLASS G : B n m h\nSALIR\n"
+        with patch('sys.stdin', StringIO(entrada)) as mocked_stdin:
+            with patch('sys.stdout', new=StringIO()) as mocked_stdout:
+                tablas.main()
+                output = mocked_stdout.getvalue()                
+                expected_output = "Clase G creada con éxito"
+                
+                self.assertTrue(expected_output in output)
+    #Test menu describir functionality
+    def test_8(self):
+        entrada = "DESCRIBIR G\nSALIR\n"
+        with patch('sys.stdin', StringIO(entrada)) as mocked_stdin:
+            with patch('sys.stdout', new=StringIO()) as mocked_stdout:
+                tablas.main()
+                output = mocked_stdout.getvalue()                
+                expected_output = "f -> A :: f\ng -> B :: g\nh -> G :: h\nk -> B :: k\nn -> G :: n\nm -> G :: m\n"
+        
+                self.assertTrue(expected_output in output)
+
 if __name__ == '__main__':
     unittest.main()
