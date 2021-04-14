@@ -4,24 +4,25 @@ class Clase:
     def __init__(self, nombre, padre = None, metodos = None):
         self.nombre = nombre
         self.padre = padre
-        self.metodos = metodos
         self.tabla = []
-
+    #Creamos la tabla
     def crear_tabla(self, metodos):
+        #Si tiene padre
         if self.padre:
             for elem in self.padre.tabla:
+                #Copiamos la tabla del padre
                 self.tabla.append([elem[0], elem[1]])
+            #Y luego verificamos si algun metodo de la clase padre
+            #se encuentra sobreescrito en la clase hija
             for i in range(len(self.tabla)):
                 if self.tabla[i][1] in metodos:
+                    #De ser asi, actualizamos el nombre
                     self.tabla[i][0] = self.nombre
+                    #Removemos el metodo del array de metodos
                     metodos.remove(self.tabla[i][1])
+        #Y finalmente, para todos los metodos que esten en el array metodos lo agregamos a la tabla
         for metodo in metodos:
-            self.tabla.append([self.nombre,metodo])
-
-    
-            
-                
-
+            self.tabla.append([self.nombre, metodo])
         
 #Clases validas es un diccionario que contiene todas las clases que el usuario ha creado hasta el momento, sin importar
 # su jerarquia, sencillamente las tiene
