@@ -1,7 +1,7 @@
 # Creamos una clase... clase  que va a tener las distintas clases que cree el usuario, la misma tendrá un nombre
 # Un padre, y sus metodos propios
 class Clase:
-    def __init__(self, nombre, padre = None, metodos = None):
+    def __init__(self, nombre, padre = None):
         self.nombre = nombre
         self.padre = padre
         self.tabla = []
@@ -65,7 +65,7 @@ def crear_clase(opciones):
         #Si los metodos fueron escritos varias veces
         if repetidos(metodos): return print("Error, los metodos no deben estar repetidos en la declaración de la clase")
         #Creamos un nuevo objeto
-        nueva_clase = Clase(opciones[0].upper(), clases_validas[padre], metodos)
+        nueva_clase = Clase(opciones[0].upper(), clases_validas[padre])
         #Si no hay dependencias circulares
         if verificar_dependencias_circulares(nueva_clase, []): return print("Error, existen dependencias circulares en la declaración de la clase")
         #Guardamos la nueva entrada
@@ -79,7 +79,7 @@ def crear_clase(opciones):
         metodos = list(map(lambda x: x.lower(), opciones[1:]))
         if repetidos(metodos): return print("Error, los metodos no deben estar repetidos en la declaración de la clase")
         #La diferencia es que, al no tener herencia, el padre es None
-        nueva_clase = Clase(opciones[0], None, metodos)
+        nueva_clase = Clase(opciones[0])
         clases_validas[opciones[0]] = nueva_clase
         nueva_clase.crear_tabla(metodos)
         return nueva_clase
