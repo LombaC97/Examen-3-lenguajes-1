@@ -140,10 +140,11 @@ def main():
     while True:
         
         print("\nIntroduzca CLASS <tipo> [<nombre>] para crear una nueva clase en el sistema")
-        print("Introduzca DESCRIBIR <nombre> para ver los metodos de una clase\n")
+        print("Introduzca DESCRIBIR <nombre> para ver los metodos de una clase")
+        print("Introduzca SALIR para salir del sistema\n")
 
         opcion = sys.stdin.readline()[:-1].strip().split(' ')
-        print(opcion)
+
         if(es_valida(opcion)):
             if opcion[0].upper() == "CLASS":
                 crear_clase(opcion[1:])
