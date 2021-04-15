@@ -112,7 +112,7 @@ def es_valida(opcion):
             for elem in opcion[3:]:
                 if not elem.isalpha():
                     return False
-            if not opcion[0].isalpha():
+            if not opcion[1].isalpha():
                 return False
             if len(opcion) < 4:
                 return False
