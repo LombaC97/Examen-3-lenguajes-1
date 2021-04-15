@@ -60,9 +60,9 @@ def crear_clase(opciones):
         #Mapeamos lower para escribir en minuscula los nombres de los distintos metodos
         metodos = list(map(lambda x: x.lower(), opciones[3:]))
         #Tomamos al padre de la clase
-        padre = opciones[2]
+        padre = opciones[2].upper()
         #Si el padre no existe en el diccionario de clases_validas, no ha sido creado
-        if padre.upper() not in clases_validas.keys(): return print("Error, la clase padre no ha sido creada")
+        if padre not in clases_validas.keys(): return print("Error, la clase padre no ha sido creada")
         #Si los metodos fueron escritos varias veces
         if repetidos(metodos): return print("Error, los metodos no deben estar repetidos en la declaración de la clase")
         #Creamos un nuevo objeto
@@ -81,17 +81,17 @@ def crear_clase(opciones):
         metodos = list(map(lambda x: x.lower(), opciones[1:]))
         if repetidos(metodos): return print("Error, los metodos no deben estar repetidos en la declaración de la clase")
         #La diferencia es que, al no tener herencia, el padre es None
-        nueva_clase = Clase(opciones[0])
-        clases_validas[opciones[0]] = nueva_clase
+        nueva_clase = Clase(opciones[0].upper())
+        clases_validas[opciones[0].upper()] = nueva_clase
         nueva_clase.crear_tabla(metodos)
         print("Clase {} creada con éxito".format(nueva_clase.nombre))
         return nueva_clase
 
 #Verifica si la clase existe o no, en todo caso, de existir, llama a describir clase
 def initialize_describir(opcion):
-    if opcion not in clases_validas.keys(): return print("Error, la clase no existe")
+    if opcion.upper() not in clases_validas.keys(): return print("Error, la clase no existe")
     
-    describir_clase(clases_validas[opcion])
+    describir_clase(clases_validas[opcion.upper()])
 
 #Describir clase recorre
 def describir_clase(a_describir):
@@ -154,7 +154,6 @@ def main():
                 break           
         else:
             print("Por favor introduzca un input en formato válido")
-
 
 if __name__ == "__main__":
     main()
